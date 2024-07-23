@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For Ndesss</title>
     <style>
-        :root{
+        :root {
             --primary: #fff;
             --bg-color: rgb(5, 53, 61);
             --bg-envelope-color: #f5edd1;
@@ -16,7 +16,8 @@
             --txt-color: #444;
             --heart-color: rgb(252, 8, 231);
         }
-        body{
+
+        body {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -25,20 +26,24 @@
             align-items: center;
             justify-content: center;
         }
+
         .container {
             height: 100vh;
             display: grid;
             place-items: center;
         }
+
         .container > .envelope-wrapper {
             background: var(--bg-envelope-color);
             box-shadow: 0 0 40px var(--shadow-color);
         }
+
         .envelope-wrapper > .envelope {
             position: relative;
             width: 300px;
             height: 230px;
         }
+
         .envelope-wrapper > .envelope::before {
             content: "";
             position: absolute;
@@ -50,6 +55,7 @@
             transform-origin: top;
             transition: all 0.5s ease-in-out 0.7s;
         }
+
         .envelope-wrapper > .envelope::after {
             content: "";
             position: absolute;
@@ -61,6 +67,7 @@
             border-bottom: 100px solid var(--envelope-cover);
             border-left: 150px solid var(--envelope-cover);
         }
+
         .envelope > .letter {
             position: absolute;
             right: 20%;
@@ -80,6 +87,7 @@
             text-align: left;
             font-size: 10px;
         }
+
         .heart {
             position: absolute;
             top: 50%;
@@ -93,7 +101,8 @@
             box-shadow: 0 1px 6px var(--shadow-color);
             cursor: pointer;
         }
-        .heart:before, 
+
+        .heart:before,
         .heart:after {
             content: "";
             position: absolute;
@@ -102,21 +111,26 @@
             background-color: var(--heart-color);
             border-radius: 50%;
         }
+
         .heart:before {
             top: -7.5px;
         }
+
         .heart:after {
             right: 7.5px;
         }
+
         .flap > .envelope:before {
             transform: rotateX(180deg);
             z-index: 0;
         }
+
         .flap > .envelope > .letter {
             bottom: 100px;
             transform: scale(1.5);
             transition-delay: 1s;
         }
+
         .flap > .heart {
             transform: rotate(90deg);
             transition-delay: 0.4s;
@@ -124,36 +138,55 @@
 
         /* Style to hide the YouTube video and only play audio */
         .youtube-audio {
-            position: absolute;
-            top: -9999px;
-            left: -9999px;
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="envelope-wrapper">
-            <div class="envelope">
-                <div class="letter">
-                    <div class="text">
-                        <strong>Teruntuk Ndessss </strong>
-                        <p>Morning...Have a nice day cantik. Semangat sekolahnya sayang. Jangan sedih terus yahh. Inget kamu punya aku. Aku punya kamu.</p>
-                        <p>Si Reza Si Dysta</p>
-                    </div>
+<div class="container">
+    <div class="envelope-wrapper">
+        <div class="envelope">
+            <div class="letter">
+                <div class="text">
+                    <strong>Teruntuk Ndessss </strong>
+                    <p>Morning...Have a nice day cantik. Semangat sekolahnya sayang. Jangan sedih terus yahh. Inget kamu punya aku. Aku punya kamu.</p>
+                    <p>Si Reza Si Dysta</p>
                 </div>
             </div>
-            <div class="heart"></div>
         </div>
+        <div class="heart"></div>
     </div>
-    
-    <!-- YouTube audio embed -->
-    <iframe class="youtube-audio" src="https://www.youtube.com/embed/gset79KMmt0?autoplay=1&loop=1&playlist=gset79KMmt0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
 
-    <script>
-        const envelope = document.querySelector('.envelope-wrapper');
-        envelope.addEventListener('click', () => {
-            envelope.classList.toggle('flap');
+<!-- YouTube audio embed -->
+<div id="player" class="youtube-audio"></div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+    function onYouTubeIframeAPIReady() {
+        new YT.Player('player', {
+            height: '0',
+            width: '0',
+            videoId: 'gset79KMmt0',
+            playerVars: {
+                'autoplay': 1,
+                'loop': 1,
+                'playlist': 'gset79KMmt0'
+            },
+            events: {
+                'onReady': onPlayerReady
+            }
         });
-    </script>
+    }
+
+    function onPlayerReady(event) {
+        event.target.playVideo();
+    }
+
+    const envelope = document.querySelector('.envelope-wrapper');
+    envelope.addEventListener('click', () => {
+        envelope.classList.toggle('flap');
+    });
+</script>
 </body>
 </html>
