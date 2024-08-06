@@ -135,11 +135,6 @@
             transform: rotate(90deg);
             transition-delay: 0.4s;
         }
-
-        /* Style to hide the YouTube video and only play audio */
-        .youtube-audio {
-            display: none;
-        }
     </style>
 </head>
 <body>
@@ -158,34 +153,23 @@
     </div>
 </div>
 
-<!-- YouTube audio embed -->
-<div id="player" class="youtube-audio"></div>
+<!-- Audio embed -->
+<audio id="audio-player" class="audio-player" loop>
+    <source src="your-audio-file.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
 
-<script src="https://www.youtube.com/iframe_api"></script>
 <script>
-    function onYouTubeIframeAPIReady() {
-        new YT.Player('player', {
-            height: '0',
-            width: '0',
-            videoId: 'gset79KMmt0',
-            playerVars: {
-                'autoplay': 1,
-                'loop': 1,
-                'playlist': 'gset79KMmt0'
-            },
-            events: {
-                'onReady': onPlayerReady
-            }
-        });
-    }
-
-    function onPlayerReady(event) {
-        event.target.playVideo();
-    }
-
     const envelope = document.querySelector('.envelope-wrapper');
+    const audioPlayer = document.getElementById('audio-player');
+
     envelope.addEventListener('click', () => {
         envelope.classList.toggle('flap');
+        if (!audioPlayer.paused) {
+            audioPlayer.pause();
+        } else {
+            audioPlayer.play();
+        }
     });
 </script>
 </body>
